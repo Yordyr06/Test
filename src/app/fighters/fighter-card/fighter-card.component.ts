@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Fighter } from '../fighters.model';
@@ -10,23 +10,23 @@ import { getFighterRecord, getStatusLabel } from '../../utils';
   templateUrl: './fighter-card.component.html',
 })
 export class FighterCardComponent {
-  @Input() fighter!: Fighter;
-  @Output() disable = new EventEmitter<string>();
-  @Output() enable = new EventEmitter<string>();
+  fighter = input.required<Fighter>();
+  disable = output<string>();
+  enable = output<string>();
 
   getRecord(): string {
-    return getFighterRecord(this.fighter);
+    return getFighterRecord(this.fighter());
   }
 
   getStatus(): string {
-    return getStatusLabel(this.fighter);
+    return getStatusLabel(this.fighter());
   }
 
   onDisable(): void {
-    this.disable.emit(this.fighter.id);
+    this.disable.emit(this.fighter().id);
   }
 
   onEnable(): void {
-    this.enable.emit(this.fighter.id);
+    this.enable.emit(this.fighter().id);
   }
 }

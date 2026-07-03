@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Fighter } from './fighters.model';
 import { FIGHTERS_SEED } from './fighters.seed';
 
@@ -8,8 +8,12 @@ const STORAGE_KEY = 'ufc-fighters';
   providedIn: 'root',
 })
 export class FightersService {
+  private fightersState = signal<Fighter[]>([]);
+  fighters = this.fightersState.asReadonly();
+
   constructor() {
     this.initStorage();
+    this.fightersState.set(this.getAll());
   }
 
   private initStorage(): void {
@@ -26,10 +30,7 @@ export class FightersService {
 
   private saveAll(fighters: Fighter[]): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(fighters));
-  }
-
-  list(): Fighter[] {
-    return this.getAll();
+    this.fightersState.set(fighters);
   }
 
   getById(id: string): Fighter | undefined {

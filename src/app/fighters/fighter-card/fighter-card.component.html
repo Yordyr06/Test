@@ -1,44 +1,53 @@
 <div
-  class="bg-neutral-900 border-t-4 border-white shadow rounded p-4 w-72 h-44 flex flex-col justify-between overflow-hidden"
-  [class.opacity-50]="!fighter.active"
+  class="bg-neutral-900 border-t-4 border-white shadow rounded p-4 w-72 h-[196px] flex flex-col justify-between overflow-hidden"
+  [class.opacity-50]="!fighter().active"
 >
   <div>
     <div class="flex items-center justify-between mb-2">
-      <h2 class="text-lg font-bold text-white truncate">{{ fighter.name }}</h2>
+      <h2 class="text-lg font-bold text-white truncate">{{ fighter().name }}</h2>
       <span
         class="text-xs font-semibold px-3 py-1 rounded-full border shrink-0"
-        [class.border-green-500]="fighter.active"
-        [class.text-green-500]="fighter.active"
-        [class.border-gray-500]="!fighter.active"
-        [class.text-gray-400]="!fighter.active"
+        [class.border-green-500]="fighter().active"
+        [class.text-green-500]="fighter().active"
+        [class.border-gray-500]="!fighter().active"
+        [class.text-gray-400]="!fighter().active"
       >
         {{ getStatus() }}
       </span>
     </div>
-    <p class="text-sm text-gray-400 mb-2 truncate">{{ fighter.nickname }}</p>
-    <p class="text-sm text-gray-300 truncate">{{ fighter.weightDivision }} - {{ fighter.country }}</p>
+    <p class="text-sm text-gray-400 mb-2 truncate min-h-5">{{ fighter().nickname }}</p>
+    <p class="text-sm text-gray-300 truncate">{{ fighter().weightDivision }} - {{ fighter().country }}</p>
     <p class="text-sm text-gray-300 mb-4">Record: {{ getRecord() }}</p>
   </div>
-  <div class="flex items-center justify-between">
+  <div class="flex items-center justify-between mt-2">
     <a
-      [routerLink]="['/fighters', fighter.id]"
-      class="text-xs font-semibold px-3 py-1 rounded-full border border-blue-500 text-blue-400 hover:bg-blue-500/10"
+      [routerLink]="['/fighters', fighter().id]"
+      aria-label="Edit"
+      class="border border-blue-500 text-blue-400 rounded-full p-1.5 hover:bg-blue-500/10"
     >
-      Edit
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+      </svg>
     </a>
     <button
-      *ngIf="fighter.active"
+      *ngIf="fighter().active"
       (click)="onDisable()"
-      class="text-xs font-semibold px-3 py-1 rounded-full border border-red-500 text-red-500 hover:bg-red-500/10 cursor-pointer"
+      aria-label="Disable"
+      class="border border-red-500 text-red-500 rounded-full p-1.5 hover:bg-red-500/10 cursor-pointer"
     >
-      Disable
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+      </svg>
     </button>
     <button
-      *ngIf="!fighter.active"
+      *ngIf="!fighter().active"
       (click)="onEnable()"
-      class="text-xs font-semibold px-3 py-1 rounded-full border border-green-500 text-green-500 hover:bg-green-500/10 cursor-pointer"
+      aria-label="Enable"
+      class="border border-green-500 text-green-500 rounded-full p-1.5 hover:bg-green-500/10 cursor-pointer"
     >
-      Enable
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+      </svg>
     </button>
   </div>
 </div>

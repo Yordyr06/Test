@@ -49,7 +49,7 @@ export const FIGHTERS_SEED: Fighter[] = [
     id: '5',
     name: 'Islam Makhachev',
     nickname: '',
-    weightDivision: 'Lightweight',
+    weightDivision: 'Welterweight',
     country: 'Russia',
     wins: 28,
     losses: 1,

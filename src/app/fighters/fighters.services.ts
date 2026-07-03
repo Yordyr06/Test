@@ -65,4 +65,14 @@ export class FightersService {
     fighters[index].active = false;
     this.saveAll(fighters);
   }
+
+  enable(id: string): void {
+    const fighters = this.getAll();
+    const index = fighters.findIndex((f) => f.id === id);
+    if (index < 0) {
+      return;
+    }
+    fighters[index].active = true;
+    this.saveAll(fighters);
+  }
 }

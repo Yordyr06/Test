@@ -12,6 +12,7 @@ import { getFighterRecord, getStatusLabel } from '../../utils';
 export class FighterCardComponent {
   @Input() fighter!: Fighter;
   @Output() disable = new EventEmitter<string>();
+  @Output() enable = new EventEmitter<string>();
 
   getRecord(): string {
     return getFighterRecord(this.fighter);
@@ -23,5 +24,9 @@ export class FighterCardComponent {
 
   onDisable(): void {
     this.disable.emit(this.fighter.id);
+  }
+
+  onEnable(): void {
+    this.enable.emit(this.fighter.id);
   }
 }

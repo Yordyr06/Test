@@ -1,0 +1,28 @@
+<div class="min-h-screen bg-black p-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-4">
+        <img src="/ufc-logo.svg" alt="UFC" class="h-8" />
+        <h1 class="text-3xl font-bold italic text-white">Record</h1>
+      </div>
+      <div class="flex justify-center">
+        <a routerLink="/fighters/new" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+          Add fighter
+        </a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+      <fighter-card
+        *ngFor="let f of fighters"
+        [fighter]="f"
+        (disable)="onDisable($event)"
+        (enable)="onEnable($event)"
+      ></fighter-card>
+    </div>
+
+    <p *ngIf="fighters.length === 0" class="text-center text-gray-400 mt-6">
+      No fighters registered.
+    </p>
+  </div>
+</div>
